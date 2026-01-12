@@ -1,0 +1,4 @@
+course_id,prereq_id
+MachineLearning,Databases
+DeepLearning,MachineLearning
+SemanticWeb,Databases

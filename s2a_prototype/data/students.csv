@@ -1,0 +1,3 @@
+student_id,label,taken_courses,interests,target_semester,max_credits,max_difficulty,preferred_track
+Alice,Alice,"Databases","MachineLearningSkill;DeepLearningSkill",2,12,3,AI
+Bob,Bob,"Databases","KnowledgeGraphs;SPARQLSkill",2,12,3,Data

@@ -1,0 +1,6 @@
+course_id,skill_id,skill_label
+Databases,DataModeling,Data Modeling
+MachineLearning,MachineLearningSkill,Machine Learning
+DeepLearning,DeepLearningSkill,Deep Learning
+SemanticWeb,KnowledgeGraphs,Knowledge Graphs
+SemanticWeb,SPARQLSkill,SPARQL

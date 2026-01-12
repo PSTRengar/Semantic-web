@@ -1,0 +1,99 @@
+@prefix : <http://example.org/s2a#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+########################
+# Ontology (TBox)
+########################
+
+:Student a owl:Class .
+:Course a owl:Class .
+:Skill a owl:Class .
+:Career a owl:Class .
+:ResearchPaper a owl:Class .
+
+:hasPrerequisite a owl:ObjectProperty ;
+  rdfs:domain :Course ;
+  rdfs:range :Course ;
+  a owl:TransitiveProperty .
+
+:takesCourse a owl:ObjectProperty ;
+  rdfs:domain :Student ;
+  rdfs:range :Course .
+
+:hasInterest a owl:ObjectProperty ;
+  rdfs:domain :Student ;
+  rdfs:range :Skill .
+
+:teachesSkill a owl:ObjectProperty ;
+  rdfs:domain :Course ;
+  rdfs:range :Skill .
+
+:requiresSkill a owl:ObjectProperty ;
+  rdfs:domain :Career ;
+  rdfs:range :Skill .
+
+:relatedTo a owl:ObjectProperty ;
+  rdfs:domain :ResearchPaper ;
+  rdfs:range :Skill .
+
+:label a owl:DatatypeProperty ;
+  rdfs:domain owl:Thing ;
+  rdfs:range xsd:string .
+
+########################
+# Instances (ABox)
+########################
+
+# Skills
+:DataModeling a :Skill ; :label "Data Modeling" .
+:MachineLearningSkill a :Skill ; :label "Machine Learning" .
+:DeepLearningSkill a :Skill ; :label "Deep Learning" .
+:KnowledgeGraphs a :Skill ; :label "Knowledge Graphs" .
+:SPARQLSkill a :Skill ; :label "SPARQL" .
+
+# Courses
+:Databases a :Course ; :label "Databases" ;
+  :teachesSkill :DataModeling .
+
+:MachineLearning a :Course ; :label "Machine Learning" ;
+  :hasPrerequisite :Databases ;
+  :teachesSkill :MachineLearningSkill .
+
+:DeepLearning a :Course ; :label "Deep Learning" ;
+  :hasPrerequisite :MachineLearning ;
+  :teachesSkill :DeepLearningSkill .
+
+:SemanticWeb a :Course ; :label "Semantic Web & Knowledge Management" ;
+  :hasPrerequisite :Databases ;
+  :teachesSkill :KnowledgeGraphs, :SPARQLSkill .
+
+# Careers
+:DataScientist a :Career ; :label "Data Scientist" ;
+  :requiresSkill :MachineLearningSkill, :DataModeling, :DeepLearningSkill .
+
+:KnowledgeEngineer a :Career ; :label "Knowledge Engineer" ;
+  :requiresSkill :KnowledgeGraphs, :SPARQLSkill, :DataModeling .
+
+# Research papers (toy metadata)
+:Paper1 a :ResearchPaper ; :label "RDF and Knowledge Graphs in Practice" ;
+  :relatedTo :KnowledgeGraphs .
+
+:Paper2 a :ResearchPaper ; :label "Attention Is All You Need (Survey Linkage)" ;
+  :relatedTo :DeepLearningSkill .
+
+:Paper3 a :ResearchPaper ; :label "SPARQL Query Optimization Overview" ;
+  :relatedTo :SPARQLSkill .
+
+# Students (2 profiles)
+:Alice a :Student ; :label "Alice" ;
+  :takesCourse :Databases ;
+  :hasInterest :MachineLearningSkill ;
+  :hasInterest :DeepLearningSkill .
+
+:Bob a :Student ; :label "Bob" ;
+  :takesCourse :Databases ;
+  :hasInterest :KnowledgeGraphs ;
+  :hasInterest :SPARQLSkill .

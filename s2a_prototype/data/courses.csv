@@ -1,0 +1,5 @@
+course_id,label,credits,semester,difficulty,track
+Databases,Databases,6,1,2,Data
+MachineLearning,Machine Learning,6,2,3,AI
+DeepLearning,Deep Learning,6,3,4,AI
+SemanticWeb,Semantic Web & Knowledge Management,6,2,3,Data
